@@ -1,0 +1,4 @@
+dbUserName=root
+dbPassword=root
+dbDriver=com.mysql.jdbc.Driver
+dbUrl=jdbc\:mysql\://127.0.0.1\:3306/db1?useUnicode\=true&characterEncoding\=utf8
