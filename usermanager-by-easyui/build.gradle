@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+    	maven{
+			//此处不加：
+			url 'http://maven.aliyun.com/nexus/content/groups/public'
+		}
+        jcenter()
+    }
+}
+
+
+
+// 使用java-library 可以使用新的依赖声明方式 api 指令、implementation 指令
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+	maven{
+		//此处不加：
+		url 'http://maven.aliyun.com/nexus/content/groups/public'
+	}
+    jcenter()
+}
+dependencies {
+    // api 指令 完全等同于compile指令
+    compile 'org.apache.commons:commons-math3:3.6.1'
+
+    // implementation 指令 对该项目有依赖的项目将无法访问到使用该命令编译的依赖中的任何程序，也就是将该依赖隐藏在内部，而不对外部公开。
+    compile 'com.alibaba:fastjson:1.2.41'
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    // compile 'taglibs:standard:1.1.2'
+    compile 'com.h2database:h2:1.4.196'
+    providedRuntime 'javax.servlet:jstl:1.2'
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+
+}
+

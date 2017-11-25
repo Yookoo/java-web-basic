@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>	
+  
+  <servlet>
+    <servlet-name>CheckLoginServlet</servlet-name>
+    <servlet-class>com.css.servlet.CheckLoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>com.css.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.css.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>NavigationServlet</servlet-name>
+    <servlet-class>com.css.servlet.NavigationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminManagerServlet</servlet-name>
+    <servlet-class>com.css.servlet.AdminManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MemberManagerServlet</servlet-name>
+    <servlet-class>com.css.servlet.MemberManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddManagerServlet</servlet-name>
+    <servlet-class>com.css.servlet.AddManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EditManagerServlet</servlet-name>
+    <servlet-class>com.css.servlet.EditManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetManagerServlet</servlet-name>
+    <servlet-class>com.css.servlet.GetManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RemoveManagerServlet</servlet-name>
+    <servlet-class>com.css.servlet.RemoveManagerServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>CheckLoginServlet</servlet-name>
+    <url-pattern>/CheckLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NavigationServlet</servlet-name>
+    <url-pattern>/NavigationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminManagerServlet</servlet-name>
+    <url-pattern>/AdminManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MemberManagerServlet</servlet-name>
+    <url-pattern>/MemberManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddManagerServlet</servlet-name>
+    <url-pattern>/AddManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditManagerServlet</servlet-name>
+    <url-pattern>/EditManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetManagerServlet</servlet-name>
+    <url-pattern>/GetManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemoveManagerServlet</servlet-name>
+    <url-pattern>/RemoveManagerServlet</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

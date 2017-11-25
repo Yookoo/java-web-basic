@@ -1,0 +1,9 @@
+# dbUserName=root
+# dbPassword=root
+# dbDriver=com.mysql.jdbc.Driver
+# dbUrl=jdbc\:mysql\://127.0.0.1\:3306/mysql?useUnicode\=true&characterEncoding\=utf8
+
+dbUserName=sa
+dbPassword=
+dbDriver=org.h2.Driver
+dbUrl=jdbc\:h2\:tcp\://localhost/mem:testmemdb;DB_CLOSE_DELAY=-1
