@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  <form-beans >
+    <form-bean name="userForm" type="web.form.UserForm" />
+    <form-bean name="messageForm" type="web.form.MessageForm" />
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards >
+    <forward name="goerr" path="/WEB-INF/error.jsp" />
+
+  </global-forwards>
+
+  <action-mappings >
+    <action
+      attribute="userForm"
+      input="/WEB-INF/login.jsp"
+      name="userForm"
+      parameter="flag"
+      path="/login"
+      scope="request"
+      type="web.action.LoginAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goFriendListUI" path="/WEB-INF/friendlist.jsp"></forward>
+      <forward name="loginerr" path="/WEB-INF/login.jsp" />
+    </action>
+
+    <action
+      input="/WEB-INF/friendlist.jsp"
+      parameter="flag"
+      path="/chat"
+      type="web.action.ChatAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goChatUI" path="/WEB-INF/chatUI.jsp"></forward>
+    </action>
+
+
+  </action-mappings>
+ <!-- 配置代理请求处理 DelegatingRequestProcessor ,它的用户是 -->
+  <controller>
+      <set-property property="processorClass" value="org.springframework.web.struts.DelegatingRequestProcessor"/>
+  </controller>
+  <message-resources parameter="web.ApplicationResources" />
+</struts-config>
+

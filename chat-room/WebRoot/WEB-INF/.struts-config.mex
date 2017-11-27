@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/chat.do" location="90,255" dimension="169,104" />
+  <StrutsActivity path="goerr;6" location="585,90" dimension="150,100" />
+  <StrutsActivity path="/WEB-INF/login.jsp" location="90,90" dimension="150,100" />
+  <StrutsActivity path="/WEB-INF/friendlist.jsp" location="345,255" dimension="150,100" />
+  <StrutsActivity path="/WEB-INF/error.jsp" location="585,270" dimension="144,53" />
+  <StrutsActivity path="/login.do" location="330,90" dimension="175,104" />
+  <StrutsActivity path="/WEB-INF/chatUI" location="950,150" dimension="131,53" />
+  <StrutsActivity path="/WEB-INF/chatUI.jsp" />
+  <StrutsTransition id="/chat.do,goChatUI,/WEB-INF/chatUI.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="174,307" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/login.do,loginok,/WEB-INF/friendlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="420,194" />
+      <AbsolutePoint location="420,255" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/chat.do,goChatUI,/WEB-INF/chatUI,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="174,255" />
+      <AbsolutePoint location="174,218" />
+      <AbsolutePoint location="1015,218" />
+      <AbsolutePoint location="1015,203" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="goerr;6,null,/WEB-INF/error.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="657,190" />
+      <AbsolutePoint location="657,270" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/login.do,goFriendListUI,/WEB-INF/friendlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="390,194" />
+      <AbsolutePoint location="390,255" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/WEB-INF/login.jsp,null,/login.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="240,142" />
+      <AbsolutePoint location="330,142" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/WEB-INF/friendlist.jsp,null,/chat.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="345,307" />
+      <AbsolutePoint location="259,307" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/login.do,loginok,/chatRoom/login.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="420,194" />
+      <AbsolutePoint location="420,209" />
+      <AbsolutePoint location="950,209" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/login.do,loginerr,/WEB-INF/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="330,172" />
+      <AbsolutePoint location="240,172" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+
