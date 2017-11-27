@@ -1,0 +1,24 @@
+allprojects {
+    group = 'com.edu.gradle'
+    version = '0.1'
+}
+
+subprojects {
+    apply plugin: 'eclipse'
+    apply plugin: 'java'
+
+
+    repositories {
+        
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        jcenter()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.codehaus.groovy:groovy:2.0.6'
+    }
+}
+

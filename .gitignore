@@ -1,2 +1,8 @@
 .class
 .jar
+**/.recommenders/
+**/.metadata/
+**/RemoteSystemsTempFiles/
+**/.settings/
+**/build/
+**/.gradle/
