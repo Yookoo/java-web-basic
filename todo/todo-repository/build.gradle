@@ -1,35 +1,65 @@
 apply plugin: 'groovy'
-//announce �����ʾ���ڲ���ʱ���֪ͨ
+//announce֪
 apply plugin: 'announce'
 
 dependencies {
     compile project(':todo-model')
+    // 添加H2的依赖
     compile 'com.h2database:h2:1.4.196'
-    //���ӱ���jar��
-    //compile fileTree(dir:'./buildSrc/build/libs',include:['*.jar'])
 }
 
-//��Ԫ���Բ�������
+
 test {
-    systemProperty 'items', '20'
+	// 从默认的测试task排除集成测试
+	exclude '**/*IntgeTest.class'
+	// 定义单元测试结果和测试报告输出目录
+	reports.html.destination = file ("$reports.html.destination/unit")
+	reports.junitXml.destination = file ("reports.junitXml.destination/unit")
+	
+//    systemProperty 'items', '20'
 //    minHeapSize = '128m'
 //    maxHeapSize = '256m'
 //    jvmArgs '-Xx:MaxPermSize=128m'
-
+/*
     testLogging {
-        //�������̨��ʾ��Ϣ
+        //�������̨��ʾ��Ϣ
         //showStandardStreams = true
-        //��ʾ�쳣����վ��Ϣ
+        //��ʾ�쳣����վ��Ϣ
         //exceptionFormat 'full'
-        //��¼�ض��Ĳ����¼�
+        //��¼�ض��Ĳ����¼�
         events 'started','passed','skipped','failed'
     }
-
+*/
     //addTestListener(new NotificationTestListener(project))
 }
 
-//task hello{
-//    doLast{
-//       System.out.println(new Date())
-//    }
-//}
+
+sourceSets{
+	integrationTest{
+		//集成测试源目录
+		java.srcDir file ('src/integtest/java')
+		//集成测试资源目录
+		resources.srcDir file('src/integtest/resources')
+		//指定编译时classpath
+		compileClasspath = sourceSets.main.output + configurations.testRuntime
+		//指定运行时classpath
+		runtimeClasspath = output + compileClasspath
+	}   
+}
+// 集成测试task
+task iXntegrationTest(type : Test){
+    //只包含集成测试
+    //include '**/*IntgeTest.class'
+	// 定义集成测试结果和测试报告输出目录
+	//reports.html.destination = file ("$reports.html.destination/integration")
+	//reports.junitXml.destination = file ("reports.junitXml.destination/integration")
+
+	testClassesDir = sourceSets.integrationTest.output.classesDir
+	classpath = sourceSets.integrationTest.runtimeClasspath
+}
+// 为check task 添加集成测试的依赖
+check.dependsOn integrationTest
+
+
+
+

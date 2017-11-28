@@ -1,6 +1,17 @@
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'groovy'
 
+
+// 功能测试
+configurations {
+	//功能测试的编译和运行时配置
+	functTestCompile.extendsFrom testCompile
+	functTestRuntime.extendsFrom testRuntime
+}
+
+ext.seleniumGroup = 'org.seleniumhq.selenium'
+ext.seleniumVersion = '2.32.0'
 dependencies {
 
     compile project(':todo-repository')
@@ -9,5 +20,55 @@ dependencies {
     runtime 'taglibs:standard:1.1.2'
 
     providedCompile 'javax.servlet:servlet-api:2.5'
+	
+	//声明编译时依赖GebJuint支持
+	functTestCompile 'org.codehaus.geb:geb-junit:2.0.6'
+	functTestCompile "$seleniumGroup:selenium-api:$seleniumVersion"
+
+	//声明运行时依赖Selecnium驱动来远程控制Firefox
+	functTestRuntime "$seleniumGroup:selenium-firefox-driver:seleniumVersion"
+}
+sourceSets{
+	functionalTest{
+		groovy.srcDir file('src/functtest.groovy')
+		resources.srcDir file('src/functtest/resources')
+		
+		compileClasspath = sourceSets.main.output + configurations.functTestCompile
+		runTimeClasspath = output + compileClasspath + configurations.functTestRuntime
+	}
+}
+task functionalTest(type Test) {
+	testClassesDir = functionalTest.output.classDir
+	classpath = sourceSets.functionalTest.runTimeClasspath
+	//指定自定义测试结果和目录
+	reports.html.destination = file("$reports.html.destination/functional")
+	reports.junitXml.destination = file("$reports.junitXml.destination/functional")
+	//强制性的Geb系统属性
+	systemProperty 'geb.env','firefox'
+	systemProperty 'geb.build.reportsDir','report.file("$name/geb")'
 
 }
+//为功能测试声明增强型的Jetty task
+ext {
+	functionalJettyStopPort = 8081
+	functionalJettyStopkey = 'stopKey'
+}
+
+task functionalJettyRun(org.gradle.api.plugins.jetty.JettyRun){
+	stopRun = functionalJettyStopPort
+	stopKey = functionalJettyStopkey
+	
+	context = 'todo'
+	deamon = true //确定在后台运行的容器（task不会被阻塞）
+}
+
+task functionalJettyStop(org.gradle.api.plugins.jetty.JettyStop){
+	stopRun = functionalJettyStopPort
+	stopKey = functionalJettyStopkey
+}
+
+//配置依赖
+functionalTest.dependsOn functionalJettyRun
+functionalTest.finalizedBy functionalJettyStop
+check.dependsOn functionalTest
+

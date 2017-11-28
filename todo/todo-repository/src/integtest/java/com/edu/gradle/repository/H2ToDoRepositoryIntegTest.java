@@ -9,10 +9,11 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 /**
- * toDoRepository的单元测试类
- * Created by Administrator on 2017/11/22.
+ * toDoRepository的集成测试类
+ * 
+ * Created by Administrator on 2017/11/28.
  */
-public class H2ToDoRepositoryTest {
+public class H2ToDoRepositoryIntegTest {
     private static final String SQL_CREATE = "CREATE TABLE todo_item (id BIGINT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(255), completed TINYINT(1));";
 
     private ToDoRepository toDoRepository = new H2ToDoRepository();
