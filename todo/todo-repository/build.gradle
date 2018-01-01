@@ -47,7 +47,7 @@ sourceSets{
 	}   
 }
 // 集成测试task
-task iXntegrationTest(type : Test){
+task integrationTest(type : Test){
     //只包含集成测试
     //include '**/*IntgeTest.class'
 	// 定义集成测试结果和测试报告输出目录

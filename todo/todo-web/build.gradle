@@ -1,7 +1,7 @@
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'groovy'
-
+apply plugin: 'eclipse-wtp'
 
 // 功能测试
 configurations {
@@ -26,7 +26,7 @@ dependencies {
 	functTestCompile "$seleniumGroup:selenium-api:$seleniumVersion"
 
 	//声明运行时依赖Selecnium驱动来远程控制Firefox
-	functTestRuntime "$seleniumGroup:selenium-firefox-driver:seleniumVersion"
+	functTestRuntime "$seleniumGroup:selenium-firefox-driver:$seleniumVersion"
 }
 sourceSets{
 	functionalTest{
@@ -34,12 +34,13 @@ sourceSets{
 		resources.srcDir file('src/functtest/resources')
 		
 		compileClasspath = sourceSets.main.output + configurations.functTestCompile
-		runTimeClasspath = output + compileClasspath + configurations.functTestRuntime
+		runtimeClasspath = output + compileClasspath + configurations.functTestRuntime
 	}
 }
-task functionalTest(type Test) {
-	testClassesDir = functionalTest.output.classDir
-	classpath = sourceSets.functionalTest.runTimeClasspath
+
+task functionalTest(type: Test) {
+	testClassesDir = sourceSets.functionalTest.output.classesDir
+	classpath = sourceSets.functionalTest.runtimeClasspath
 	//指定自定义测试结果和目录
 	reports.html.destination = file("$reports.html.destination/functional")
 	reports.junitXml.destination = file("$reports.junitXml.destination/functional")
@@ -54,16 +55,16 @@ ext {
 	functionalJettyStopkey = 'stopKey'
 }
 
-task functionalJettyRun(org.gradle.api.plugins.jetty.JettyRun){
-	stopRun = functionalJettyStopPort
+task functionalJettyRun(type: org.gradle.api.plugins.jetty.JettyRun){
+	stopPort = functionalJettyStopPort
 	stopKey = functionalJettyStopkey
 	
-	context = 'todo'
-	deamon = true //确定在后台运行的容器（task不会被阻塞）
+	contextPath = 'todo-parent'
+	daemon = true //确定在后台运行的容器（task不会被阻塞）
 }
 
-task functionalJettyStop(org.gradle.api.plugins.jetty.JettyStop){
-	stopRun = functionalJettyStopPort
+task functionalJettyStop(type: org.gradle.api.plugins.jetty.JettyStop){
+	stopPort = functionalJettyStopPort
 	stopKey = functionalJettyStopkey
 }
 

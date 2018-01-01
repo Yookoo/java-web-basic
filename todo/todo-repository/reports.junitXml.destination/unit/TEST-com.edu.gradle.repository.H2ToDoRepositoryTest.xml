@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.edu.gradle.repository.H2ToDoRepositoryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-11-28T03:49:42" hostname="zhuky-PC" time="0.125">
+<testsuite name="com.edu.gradle.repository.H2ToDoRepositoryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-11-30T08:12:22" hostname="zhuky-PC" time="0.288">
   <properties/>
-  <testcase name="insert" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.094"/>
-  <testcase name="findAll" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.0"/>
-  <testcase name="update" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.015"/>
-  <testcase name="findById" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.016"/>
-  <system-out><![CDATA[id :47
+  <testcase name="insert" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.217"/>
+  <testcase name="findAll" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.011"/>
+  <testcase name="update" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.038"/>
+  <testcase name="findById" classname="com.edu.gradle.repository.H2ToDoRepositoryTest" time="0.022"/>
+  <system-out><![CDATA[id :79
 36: asdasdasdasasda [completed: false]
 37: 123 [completed: false]
 38: asdasdasdasasda [completed: false]
@@ -15,6 +15,10 @@
 45: 123 [completed: false]
 46: 123 [completed: false]
 47: 123 [completed: false]
+76: 123 [completed: false]
+77: 123 [completed: false]
+78: 123 [completed: false]
+79: 123 [completed: false]
 toDoItem :null: null [completed: false]
 null: null [completed: false]
 ]]></system-out>
