@@ -18,13 +18,13 @@
 	<!-- 启用Spring 基于 Annotation的DI，使用户可以在Spring MVC中使用Spring的强大功能 -->
 	<!-- 激活@required @Autowired,JSR 250's @PostConstruts @PreDestory @Resources 等注解  -->
 	<context:annotation-config/>
-	<context:component-scan base-package="com.edu"/>
+
 	<!-- DispatcherServlet上下文，只搜索@Controller标注的类，不搜索其他标注的类 -->
-	<!-- 
+
 	<context:component-scan base-package="com.edu">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	 -->
+
 	<!-- 默认会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。
 		扩充了注解驱动，并提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）。 -->
 	<mvc:annotation-driven />
