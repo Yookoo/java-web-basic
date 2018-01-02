@@ -21,7 +21,7 @@
 
 	<!-- DispatcherServlet上下文，只搜索@Controller标注的类，不搜索其他标注的类 -->
 
-	<context:component-scan base-package="com.edu">
+	<context:component-scan base-package="com.edu" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
