@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- shiro 配置 -->
+	<!-- 1. 配置 securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="cacheManager" ref="cacheManager" />
+		<property name="realm" ref="jdbcRealm" />
+	</bean>
+	<!-- 2. 配置 cacheManager -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml" />
+	</bean>
+	<!-- 3. 配置Realm -->
+	<bean id="jdbcRealm" class="com.edu.shiro.ShiroRealm" >
+		<property name="credentialsMatcher">
+			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="MD5"/>
+				<property name="hashIterations" value="5"/>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 4. 生命周期Bean管理器 : 可以调用Spring IOC 容器中的Bean 的生命周期方法 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- 5. 启用IOC容器中 shiro 的注解，但是必须在配置了 lifecycleBeanPostProcessor 之后才能使用 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<!-- -->
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	<!-- shiroFilter id需和web.xml中的filter <filter-name>一致 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.jsp" />
+		<property name="successUrl" value="/list.jsp" />
+		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+		<!-- 配置权限 -->
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
+		<!-- 
+		<property name="filterChainDefinitions">
+			<value>
+				/login.jsp = anon
+				/shiro/login = anon
+				/shiro/logout = logout
+				
+				/user.jsp = roles[user]
+				/admin.jsp = roles[admin]
+				/** = authc
+			</value>
+		</property>
+ 		-->
+	</bean>
+	<bean id = "filterChainDefinitionMap" factory-bean="filterChainDefinitionBuilder" factory-method="build"/>
+	<bean id= "filterChainDefinitionBuilder" class="com.edu.shiro.FilterChainDefinitionMapBuilder"></bean>
+</beans>
